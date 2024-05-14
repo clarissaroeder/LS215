@@ -30,14 +30,26 @@ let longText = 'Four score and seven years ago our fathers brought forth' +
 
 function longestSentence(text) {
   let sentences = text.trim().split(/(?<=[.!?])\s+/);
-  let wordCounts = sentences.map(sentence => sentence.split(' ').length);
+  let wordCounts = sentences.map(sentence => { 
+    return sentence.replace(/[.!?]/g, '').trim().split(/\s+/).length;
+  });
 
   let maxWordCount = Math.max(...wordCounts);
-  let longestSentenceIndex = wordCounts.indexOf(maxWordCount);
+  let longestSentenceIndex = wordCounts.lastIndexOf(maxWordCount);
 
   console.log(sentences[longestSentenceIndex]);
   console.log('');
   console.log(`The longest sentence has ${maxWordCount} words.`);
 }
 
-longestSentence(longText);
+// longestSentence(longText);
+
+longestSentence("Hello there! Why  not? Goodbye."); 
+// Why  not?
+
+// The longest sentence has 2 words.
+
+longestSentence("Hello   ! Why  not? Goodbye."); 
+// Why  not?
+
+// The longest sentence has 2 words
